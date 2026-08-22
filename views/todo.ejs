@@ -1,0 +1,98 @@
+<% layout("/layouts/boilerPlate") %>
+
+<section class="todo-page">
+  <div class="todo-hero">
+    <p class="mb-2 text-uppercase fw-semibold">Mini Project</p>
+    <h1 class="mb-2">Todo List</h1>
+    <p class="mb-0">Add tasks, mark them complete, and remove them when you are done.</p>
+  </div>
+
+  <div class="todo-panel">
+    <div class="todo-input-group">
+      <input
+        id="todo-input"
+        type="text"
+        class="form-control"
+        placeholder="Enter a task"
+        aria-label="New todo task"
+      />
+      <button id="add-todo-btn" class="btn btn-dark add-btn">Add Task</button>
+    </div>
+
+    <p id="todo-empty" class="todo-empty">No tasks yet. Add your first one.</p>
+    <ul id="todo-list" class="todo-list"></ul>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const input = document.getElementById("todo-input");
+    const addButton = document.getElementById("add-todo-btn");
+    const list = document.getElementById("todo-list");
+    const emptyState = document.getElementById("todo-empty");
+
+    const updateEmptyState = () => {
+      emptyState.style.display = list.children.length ? "none" : "block";
+    };
+
+    const createTodoItem = (taskText) => {
+      const item = document.createElement("li");
+      item.className = "todo-item";
+
+      const task = document.createElement("div");
+      task.className = "todo-task";
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.className = "form-check-input mt-0";
+
+      const text = document.createElement("span");
+      text.className = "todo-text";
+      text.textContent = taskText;
+
+      checkbox.addEventListener("change", () => {
+        item.classList.toggle("completed", checkbox.checked);
+      });
+
+      task.append(checkbox, text);
+
+      const actions = document.createElement("div");
+      actions.className = "todo-actions";
+
+      const deleteButton = document.createElement("button");
+      deleteButton.type = "button";
+      deleteButton.className = "btn btn-sm btn-outline-danger";
+      deleteButton.textContent = "Delete";
+      deleteButton.addEventListener("click", () => {
+        item.remove();
+        updateEmptyState();
+      });
+
+      actions.append(deleteButton);
+      item.append(task, actions);
+      return item;
+    };
+
+    const addTask = () => {
+      const taskText = input.value.trim();
+      if (!taskText) {
+        input.focus();
+        return;
+      }
+
+      list.appendChild(createTodoItem(taskText));
+      input.value = "";
+      input.focus();
+      updateEmptyState();
+    };
+
+    addButton.addEventListener("click", addTask);
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        addTask();
+      }
+    });
+
+    updateEmptyState();
+  })();
+</script>

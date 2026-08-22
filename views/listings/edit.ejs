@@ -9,9 +9,10 @@
       action="/listings/<%= listing._id%>?_method=PUT"
       novalidate
       class="needs-validation"
+      enctype="multipart/form-data"
     >
       <div class="mb-3">
-        <lable for="title" class="form-label">Title</lable>
+        <label for="title" class="form-label">Title</label>
 
         <input
           type="text"
@@ -24,7 +25,7 @@
       </div>
 
       <div class="mb-3">
-        <lable for="description" class="form-label">description</lable>
+        <label for="description" class="form-label">description</label>
 
         <textarea name="listing[description]" class="form-control" required>
 <%= listing.description %></textarea
@@ -33,20 +34,25 @@
       </div>
 
       <div class="mb-3">
-        <lable for="image" class="form-label">image link</lable>
+        <img src="<%= originalImageUrl%>" />
+       
+      </div>
+
+      <div class="mb-3">
+        <label for="image" class="form-label">upload new image</label>
 
         <input
-          type="text"
+          type="file"
           name="listing[image]"
-          value="<%= listing.image.url %>"
+          
           class="form-control"
-          required
+          
         />
-        <div class="invalid-feedback">input valid image</div>
+       
       </div>
       <div class="row">
         <div class="mb-3 col-md-4">
-          <lable for="price" class="form-label">price</lable>
+          <label for="price" class="form-label">price</label>
 
           <input
             type="number"
@@ -59,7 +65,7 @@
         </div>
 
         <div class="mb-3 col-md-4">
-          <lable for="text" class="form-label">country</lable>
+          <label for="text" class="form-label">country</label>
 
           <input
             type="text"
@@ -73,7 +79,7 @@
       </div>
 
       <div class="mb-3">
-        <lable for="location" class="form-label">location</lable>
+        <label for="location" class="form-label">location</label>
 
         <input
           type="text"
@@ -84,9 +90,24 @@
         />
         <div class="invalid-feedback">Please enter a valid location</div>
       </div>
+      <div class="mb-3">
+        <label for="category" class="form-label">category</label>
+        <select name="listing[category]" class="form-control" required>
+          <option value="" disabled>Select a category</option>
+          <% ["Trending","Rooms","Iconic Cities","Mountains","Castles","Amazing Pools","Camping","Farms","Arctic"].forEach(cat => { %>
+            <option value="<%= cat %>" <%= listing.category === cat ? "selected" : "" %>>
+              <%= cat %>
+            </option>
+          <% }) %>
+        </select>
+        <div class="invalid-feedback">Please select a category</div>
+      </div>
 
       <button class="btn btn-dark edit-btn mt-3">EDIT</button>
+      
+
+      
     </form>
   </div>
 </div>
-<script src="/js/script.js"></script>
+

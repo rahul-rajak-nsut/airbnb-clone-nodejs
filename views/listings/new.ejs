@@ -5,9 +5,15 @@
     <h3>Create a new listing</h3>
     <br />
 
-    <form method="post" action="/listings" novalidate class="needs-validation">
+    <form
+      method="post"
+      action="/listings"
+      novalidate
+      class="needs-validation"
+      enctype="multipart/form-data"
+    >
       <div class="mb-3">
-        <lable for="title" class="form-label">Title</lable>
+        <label for="title" class="form-label">Title</label>
         <input
           name="listing[title]"
           placeholder="enter title"
@@ -19,7 +25,7 @@
       </div>
 
       <div class="mb-3">
-        <lable for="description" class="form-label">description</lable>
+        <label for="description" class="form-label">description</label>
         <textarea
           name="listing[description]"
           class="form-control"
@@ -28,20 +34,21 @@
         <div class="invalid-feedback">Enter description</div>
       </div>
 
+    
       <div class="mb-3">
-        <lable for="image" class="form-label">image</lable>
+        <label for="image" class="form-label">Upload Image</label>
 
         <input
           name="listing[image]"
-          placeholder="enter image URL/Link"
-          type="text"
+          placeholder="Upload image"
+          type="file"
           class="form-control"
         />
       </div>
 
       <div class="row">
         <div class="mb-3 col-md-4">
-          <lable for="price" class="form-label">price</lable>
+          <label for="price" class="form-label">price</label>
 
           <input
             name="listing[price]"
@@ -54,7 +61,7 @@
         </div>
 
         <div class="mb-3 col-md-8">
-          <lable for="country" class="form-label">country</lable>
+          <label for="country" class="form-label">country</label>
           <input
             name="listing[country]"
             placeholder="enter country"
@@ -67,7 +74,7 @@
       </div>
 
       <div class="mb-3">
-        <lable for="location" class="form-label">location</lable>
+        <label for="location" class="form-label">location</label>
 
         <input
           name="listing[location]"
@@ -79,6 +86,18 @@
         <div class="invalid-feedback">Please enter a valid location</div>
         <br />
       </div>
+       <div class="mb-3">
+        <label for="category" class="form-label">category</label>
+        <select name="listing[category]" class="form-control" required>
+          <option value="" disabled selected>Select a category</option>
+          <% ["Trending","Rooms","Iconic Cities","Mountains","Castles","Amazing Pools","Camping","Farms","Arctic"].forEach(cat => { %>
+            <option value="<%= cat %>"><%= cat %></option>
+          <% }) %>
+        </select>
+        <div class="invalid-feedback">Please select a category</div>
+      </div>
+
+      <button class="btn btn-dark add-btn mt-3" class="mb-3">add</button>
       <button class="btn btn-dark add-btn mt-3" class="mb-3">add</button>
     </form>
   </div>
