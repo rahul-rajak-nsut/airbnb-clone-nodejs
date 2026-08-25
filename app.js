@@ -1,8 +1,8 @@
-if(process.env.NODE_ENV != "produnction"){
-require('dotenv').config();
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
 }
 
-console.log(process.env.secret);
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -13,13 +13,15 @@ const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
 const { listingSchema, reviewSchema } = require("./schema.js");
+const Review=require("./models/review.js");
+const listingRouter=require("./routes/listing.js");
 //routers
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/reviews.js");
 const userRouter = require("./routes/user.js");
 
 const session = require("express-session");
-const { MongoStore } = require("connect-mongo");
+const {MongoStore} = require('connect-mongo');
 const flash = require("connect-flash");
 const passport= require("passport");
 const LocalStrategy= require("passport-local");
