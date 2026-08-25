@@ -14,7 +14,7 @@ const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
 const { listingSchema, reviewSchema } = require("./schema.js");
 const Review=require("./models/review.js");
-const listingRouter=require("./routes/listing.js");
+
 //routers
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/reviews.js");
