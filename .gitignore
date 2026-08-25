@@ -1,4 +1,4 @@
 node_modules/
 .env
-*.iml
-*.code-workspace
+Major Project.code-workspace
+Major Project.iml
