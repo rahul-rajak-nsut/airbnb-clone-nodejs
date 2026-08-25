@@ -13,7 +13,7 @@ const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
 const { listingSchema, reviewSchema } = require("./schema.js");
-const Review=require("./models/review.js");
+
 
 //routers
 const listingRouter = require("./routes/listing.js");
